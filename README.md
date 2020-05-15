@@ -1,11 +1,12 @@
-# terraform-anycloud-template [![](https://github.com/rhythmictech/terraform-anycloud-template/workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-anycloud-template/actions) <a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=RhythmicTech" alt="follow on Twitter"></a>
-Template repository for terraform modules. Good for any cloud and any provider.
+# terraform-aws-elasticache  [![](https://github.com/rhythmictech/terraform-aws-elasticache /workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-aws-elasticache /actions) <a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=RhythmicTech" alt="follow on Twitter"></a>
+Terraform ElastiCache Module: Simple and Sensibly Opinionated
 
 ## Example
 Here's what using the module will look like
-```
+```terraform
 module "example" {
-  source = "rhythmictech/terraform-mycloud-mymodule
+  source  = "rhythmictech/terraform-aws-elasticache"
+  version = "0.0.1
 }
 ```
 
