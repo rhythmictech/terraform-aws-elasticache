@@ -27,13 +27,13 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "subnets_ids" {
+variable "subnet_ids" {
   description = "List of subnet IDs to make Elasticache available on"
   type        = list(string)
   default     = []
 }
 
-variable "ingresss_rules" {
+variable "ingress_rules" {
   description = "List of ports to allow ingress on"
   type = list(object({
     port        = number
@@ -84,4 +84,10 @@ variable "availability_zones" {
   description = "List of EC2 availability zones in which the replication group's cache clusters will be created"
   type        = list(string)
   default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+}
+
+variable "replication_group_description" {
+  description = "Description for ElastiCache Replication Group"
+  type        = string
+  default     = ""
 }

@@ -20,32 +20,30 @@ module "tags" {
 resource "aws_security_group" "this" {
   name   = local.security_group_name
   vpc_id = var.vpc_id
-  tags = merge(module.label.tags, {
+  tags = merge(module.tags.tags, {
     Name = local.security_group_name
   })
 }
 
 resource "aws_security_group_rule" "egress" {
-  name              = local.security_group_egress_rule_name
-  description       = "Allow all egress traffic from ${local.name}"
+  description       = local.egress_security_group_rule_description
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.this.this.id
+  security_group_id = aws_security_group.this.id
   type              = "egress"
 }
 
 resource "aws_security_group_rule" "ingress" {
-  for_each = var.ingress_rules
+  count = length(var.ingress_rules)
 
-  name              = "${local.security_group_ingress_rule_name_prefix}-${ingress.value.port}"
-  description       = "Allow ${ingress.value.protocol} ingress to ${local.name} on port ${ingress.value.port}"
-  from_port         = ingress.value.port
-  to_port           = ingress.value.port
-  protocol          = ingress.value.protocol
-  cidr_blocks       = ingress.value.cidr_blocks
-  security_group_id = aws_security_group.this.this.id
+  description       = "Allow ${var.ingress_rules[count.index].protocol} ingress to ${local.name} on port ${var.ingress_rules[count.index].port}"
+  from_port         = var.ingress_rules[count.index].port
+  to_port           = var.ingress_rules[count.index].port
+  protocol          = var.ingress_rules[count.index].protocol
+  cidr_blocks       = var.ingress_rules[count.index].cidr_blocks
+  security_group_id = aws_security_group.this.id
   type              = "ingress"
 }
 
@@ -60,8 +58,8 @@ resource "aws_elasticache_subnet_group" "this" {
 
 resource "aws_elasticache_replication_group" "this" {
 
-  replication_group_id          = module.tags.id
-  replication_group_description = module.label.id
+  replication_group_id          = module.tags.name
+  replication_group_description = local.replication_group_description
 
   engine_version        = var.engine_version
   node_type             = var.instance_type
@@ -69,16 +67,16 @@ resource "aws_elasticache_replication_group" "this" {
   port                  = var.port
   parameter_group_name  = var.parameter_group_name
 
-  automatic_failover_enabled = var.automatic_failover_enabled
-  subnet_group_name          = local.elasticache_subnet_group_name
-  security_group_ids         = var.use_existing_security_groups ? var.existing_security_groups : [join("", aws_security_group.default.*.id)]
-  maintenance_window         = var.maintenance_window
-  notification_topic_arn     = var.notification_topic_arn
-  at_rest_encryption_enabled = var.at_rest_encryption_enabled
-  transit_encryption_enabled = var.transit_encryption_enabled
-  snapshot_window            = var.snapshot_window
-  snapshot_retention_limit   = var.snapshot_retention_limit
-  apply_immediately          = var.apply_immediately
+  # automatic_failover_enabled = var.automatic_failover_enabled
+  subnet_group_name  = aws_elasticache_subnet_group.this.name
+  security_group_ids = [aws_security_group.this.id]
+  # maintenance_window         = var.maintenance_window
+  # notification_topic_arn     = var.notification_topic_arn
+  # at_rest_encryption_enabled = var.at_rest_encryption_enabled
+  # transit_encryption_enabled = var.transit_encryption_enabled
+  # snapshot_window            = var.snapshot_window
+  # snapshot_retention_limit   = var.snapshot_retention_limit
+  # apply_immediately          = var.apply_immediately
 
   tags = module.tags.tags
 }

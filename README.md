@@ -34,12 +34,13 @@ No requirements.
 | cluster\_size | Number of nodes in Elasticache cluster | `number` | `4` | no |
 | engine\_version | Elasticache engine version | `string` | `"4.0.10"` | no |
 | env | Environment to tag resources with | `string` | `"default"` | no |
-| ingresss\_rules | List of ports to allow ingress on | <pre>list(object({<br>    port        = number<br>    protocol    = string<br>    cidr_blocks = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "port": 6379,<br>    "protocol": "tcp"<br>  }<br>]</pre> | no |
+| ingress\_rules | List of ports to allow ingress on | <pre>list(object({<br>    port        = number<br>    protocol    = string<br>    cidr_blocks = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "port": 6379,<br>    "protocol": "tcp"<br>  }<br>]</pre> | no |
 | instance\_type | Type of ec2 instance for elasticache | `string` | `"cache.t2.micro"` | no |
 | name | Moniker to apply to all resources in the module | `string` | n/a | yes |
 | parameter\_group\_name | Elasticache parameter group name | `string` | `"default.redis4.0"` | no |
 | port | Elasticache port | `number` | `6379` | no |
-| subnets\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | `[]` | no |
+| replication\_group\_description | Description for ElastiCache Replication Group | `string` | `""` | no |
+| subnet\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | `[]` | no |
 | tags | User-Defined tags | `map(string)` | `{}` | no |
 | vpc\_id | VPC ID | `string` | n/a | yes |
 
