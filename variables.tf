@@ -31,8 +31,20 @@ variable "ingress_rule_cidr_blocks" {
   default     = []
 }
 
+variable "ingress_cidr_sg_rule_description" {
+  description = "Description for CIDR-block Ingress rule"
+  type        = string
+  default     = null
+}
+
 variable "ingress_rule_sg" {
   description = "Security Group that is allowed ingress to ElastiCache"
+  type        = string
+  default     = null
+}
+
+variable "ingress_sg_sg_rule_description" {
+  description = "Description for Security Group Ingress rule"
   type        = string
   default     = null
 }
@@ -79,7 +91,7 @@ variable "availability_zones" {
 variable "replication_group_description" {
   description = "Description for ElastiCache Replication Group"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "apply_immediately" {
