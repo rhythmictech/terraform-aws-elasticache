@@ -1,4 +1,3 @@
-
 ###############################################
 # General
 ###############################################
@@ -90,4 +89,16 @@ variable "replication_group_description" {
   description = "Description for ElastiCache Replication Group"
   type        = string
   default     = ""
+}
+
+variable "apply_immediately" {
+  default     = false
+  type        = bool
+  description = "Specifies whether any modifications are applied immediately, or during the next maintenance window"
+}
+
+variable "auto_minor_version_upgrade" {
+  description = "Specifies whether a minor engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window."
+  type        = bool
+  default     = true
 }

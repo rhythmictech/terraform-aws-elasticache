@@ -1,4 +1,3 @@
-
 ###############################################
 # General
 ###############################################
@@ -58,7 +57,7 @@ resource "aws_elasticache_subnet_group" "this" {
 
 resource "aws_elasticache_replication_group" "this" {
 
-  replication_group_id          = module.tags.name
+  replication_group_id          = local.name
   replication_group_description = local.replication_group_description
 
   engine_version        = var.engine_version
@@ -67,16 +66,10 @@ resource "aws_elasticache_replication_group" "this" {
   port                  = var.port
   parameter_group_name  = var.parameter_group_name
 
-  # automatic_failover_enabled = var.automatic_failover_enabled
-  subnet_group_name  = aws_elasticache_subnet_group.this.name
-  security_group_ids = [aws_security_group.this.id]
-  # maintenance_window         = var.maintenance_window
-  # notification_topic_arn     = var.notification_topic_arn
-  # at_rest_encryption_enabled = var.at_rest_encryption_enabled
-  # transit_encryption_enabled = var.transit_encryption_enabled
-  # snapshot_window            = var.snapshot_window
-  # snapshot_retention_limit   = var.snapshot_retention_limit
-  # apply_immediately          = var.apply_immediately
+  auto_minor_version_upgrade = var.auto_minor_version_upgrade
+  subnet_group_name          = aws_elasticache_subnet_group.this.name
+  security_group_ids         = [aws_security_group.this.id]
+  apply_immediately          = var.apply_immediately
 
   tags = module.tags.tags
 }
