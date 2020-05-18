@@ -8,5 +8,5 @@ output "security_group" {
 
 output "elasticache_replication_group" {
   description = "elasticache_replication_group resource"
-  value       = elasticache_replication_group.this
+  value       = aws_elasticache_replication_group.this
 }
