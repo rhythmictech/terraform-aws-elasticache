@@ -7,11 +7,7 @@ module "tags" {
 
   enforce_case = "UPPER"
   tags         = var.tags
-
-  names = [
-    var.env,
-    var.name
-  ]
+  names        = [var.name]
 }
 
 ###############################################
