@@ -42,7 +42,7 @@ No requirements.
 | parameter\_group\_name | Elasticache parameter group name | `string` | `"default.redis4.0"` | no |
 | port | Elasticache port | `number` | `6379` | no |
 | replication\_group\_description | Description for ElastiCache Replication Group | `string` | `""` | no |
-| subnet\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | `[]` | no |
+| subnet\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | n/a | yes |
 | tags | User-Defined tags | `map(string)` | `{}` | no |
 | vpc\_id | VPC ID | `string` | n/a | yes |
 

@@ -29,7 +29,6 @@ variable "vpc_id" {
 variable "subnet_ids" {
   description = "List of subnet IDs to make Elasticache available on"
   type        = list(string)
-  default     = []
 }
 
 variable "ingress_rules" {
