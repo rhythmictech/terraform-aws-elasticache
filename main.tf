@@ -21,7 +21,7 @@ resource "aws_security_group" "this" {
   name   = local.security_group_name
   vpc_id = var.vpc_id
 
-  tags = merge(module.tags.tags, {
+  tags = merge(local.tags, {
     Name = local.security_group_name
   })
 }
@@ -81,5 +81,5 @@ resource "aws_elasticache_replication_group" "this" {
   security_group_ids         = [aws_security_group.this.id]
   apply_immediately          = var.apply_immediately
 
-  tags = module.tags.tags
+  tags = local.tags
 }
