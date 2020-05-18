@@ -76,6 +76,9 @@ resource "aws_elasticache_replication_group" "this" {
   subnet_group_name          = aws_elasticache_subnet_group.this.name
   security_group_ids         = [aws_security_group.this.id]
   apply_immediately          = var.apply_immediately
+  maintenance_window         = var.maintenance_window
+  notification_topic_arn     = var.notification_topic_arn
+  snapshot_window            = var.snapshot_window
 
   tags = merge(local.tags, {
     Name = local.name

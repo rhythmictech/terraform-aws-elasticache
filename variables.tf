@@ -105,3 +105,21 @@ variable "auto_minor_version_upgrade" {
   type        = bool
   default     = true
 }
+
+variable "maintenance_window" {
+  type        = string
+  default     = "sun:03:00-sun:04:00"
+  description = "Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00"
+}
+
+variable "notification_topic_arn" {
+  type        = string
+  default     = null
+  description = "An Amazon Resource Name (ARN) of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic"
+}
+
+variable "snapshot_window" {
+  description = "(Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00"
+  type        = string
+  default     = "02:00-03:00"
+}
