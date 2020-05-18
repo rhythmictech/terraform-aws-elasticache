@@ -8,4 +8,5 @@ locals {
   ingress_cidr_sg_rule_description       = var.ingress_cidr_sg_rule_description
   ingress_sg_sg_rule_description         = var.ingress_sg_sg_rule_description
   replication_group_description          = coalesce(var.replication_group_description, "Replication group for ${local.name}, managed by terraform")
+  create_ingress_cidr_sg_rule            = length(var.ingress_rule_cidr_blocks) > 0
 }

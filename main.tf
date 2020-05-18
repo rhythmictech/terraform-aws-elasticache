@@ -33,6 +33,7 @@ resource "aws_security_group_rule" "egress" {
 }
 
 resource "aws_security_group_rule" "ingress_cidr" {
+  count             = local.create_ingress_cidr_sg_rule ? 1 : 0
   description       = local.ingress_cidr_sg_rule_description
   from_port         = var.port
   to_port           = var.port
