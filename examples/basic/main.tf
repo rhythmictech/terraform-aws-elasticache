@@ -15,8 +15,8 @@ module "example" {
   source = "../.."
 
   name       = "test"
-  vpc_id     = data.aws_vpc.default.id
   subnet_ids = data.aws_subnet_ids.private.ids
+  vpc_id     = data.aws_vpc.default.id
 }
 
 output "example" {
