@@ -37,8 +37,7 @@ resource "aws_security_group_rule" "egress" {
 }
 
 resource "aws_security_group_rule" "ingress" {
-  count = length(var.ingress_rules)
-
+  count             = length(var.ingress_rules)
   description       = "Allow ${var.ingress_rules[count.index].protocol} ingress to ${local.name} on port ${var.ingress_rules[count.index].port}"
   from_port         = var.ingress_rules[count.index].port
   to_port           = var.ingress_rules[count.index].port
