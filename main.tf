@@ -7,6 +7,7 @@ module "tags" {
 
   enforce_case = "UPPER"
   tags         = var.tags
+
   names = [
     var.env,
     var.name
@@ -19,6 +20,7 @@ module "tags" {
 resource "aws_security_group" "this" {
   name   = local.security_group_name
   vpc_id = var.vpc_id
+
   tags = merge(module.tags.tags, {
     Name = local.security_group_name
   })
