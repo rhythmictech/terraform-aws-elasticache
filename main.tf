@@ -36,13 +36,22 @@ resource "aws_security_group_rule" "egress" {
   type              = "egress"
 }
 
-resource "aws_security_group_rule" "ingress" {
-  count             = length(var.ingress_rules)
-  description       = "Allow ${var.ingress_rules[count.index].protocol} ingress to ${local.name} on port ${var.ingress_rules[count.index].port}"
-  from_port         = var.ingress_rules[count.index].port
-  to_port           = var.ingress_rules[count.index].port
-  protocol          = var.ingress_rules[count.index].protocol
-  cidr_blocks       = var.ingress_rules[count.index].cidr_blocks
+resource "aws_security_group_rule" "ingress_cidr" {
+  description       = local.ingress_cidr_sg_rule_description
+  from_port         = var.port
+  to_port           = var.port
+  protocol          = "tcp"
+  cidr_blocks       = var.ingress_rule_cidr_blocks
+  security_group_id = aws_security_group.this.id
+  type              = "ingress"
+}
+
+resource "aws_security_group_rule" "ingress_sg" {
+  description       = local.ingress_sg_sg_rule_description
+  from_port         = var.port
+  to_port           = var.port
+  protocol          = "tcp"
+  cidr_blocks       = var.ingress_rule_sg
   security_group_id = aws_security_group.this.id
   type              = "ingress"
 }

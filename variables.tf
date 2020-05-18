@@ -31,18 +31,16 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
-variable "ingress_rules" {
-  description = "List of ports to allow ingress on"
-  type = list(object({
-    port        = number
-    protocol    = string
-    cidr_blocks = list(string)
-  }))
-  default = [{
-    port        = 6379
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }]
+variable "ingress_rule_cidr_blocks" {
+  description = "List of CIDR blocks that are allowed ingress to ElastiCache"
+  type        = list(string)
+  default     = []
+}
+
+variable "ingress_rule_sg" {
+  description = "Security Group that is allowed ingress to ElastiCache"
+  type        = string
+  default     = null
 }
 
 ###############################################

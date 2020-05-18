@@ -36,7 +36,8 @@ No requirements.
 | cluster\_size | Number of nodes in Elasticache cluster | `number` | `4` | no |
 | engine\_version | Elasticache engine version | `string` | `"4.0.10"` | no |
 | env | Environment to tag resources with | `string` | `"default"` | no |
-| ingress\_rules | List of ports to allow ingress on | <pre>list(object({<br>    port        = number<br>    protocol    = string<br>    cidr_blocks = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "port": 6379,<br>    "protocol": "tcp"<br>  }<br>]</pre> | no |
+| ingress\_rule\_cidr\_blocks | List of CIDR blocks that are allowed ingress to ElastiCache | `list(string)` | `[]` | no |
+| ingress\_rule\_sg | Security Group that is allowed ingress to ElastiCache | `string` | `null` | no |
 | instance\_type | Type of ec2 instance for elasticache | `string` | `"cache.t2.micro"` | no |
 | name | Moniker to apply to all resources in the module | `string` | n/a | yes |
 | parameter\_group\_name | Elasticache parameter group name | `string` | `"default.redis4.0"` | no |
