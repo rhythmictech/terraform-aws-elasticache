@@ -43,11 +43,12 @@ resource "aws_security_group_rule" "ingress_cidr" {
 }
 
 resource "aws_security_group_rule" "ingress_sg" {
+  for_each          = var.security_group_ids
   description       = local.ingress_sg_sg_rule_description
   from_port         = var.port
   to_port           = var.port
   protocol          = "tcp"
-  cidr_blocks       = var.ingress_rule_sg
+  cidr_blocks       = each.value
   security_group_id = aws_security_group.this.id
   type              = "ingress"
 }

@@ -37,10 +37,10 @@ variable "ingress_cidr_sg_rule_description" {
   default     = null
 }
 
-variable "ingress_rule_sg" {
-  description = "Security Group that is allowed ingress to ElastiCache"
-  type        = string
-  default     = null
+variable "security_group_ids" {
+  description = "Security Groups that are allowed ingress to ElastiCache"
+  type        = set(string)
+  default     = []
 }
 
 variable "ingress_sg_sg_rule_description" {

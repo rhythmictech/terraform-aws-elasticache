@@ -37,7 +37,6 @@ No requirements.
 | engine\_version | Elasticache engine version | `string` | `"4.0.10"` | no |
 | ingress\_cidr\_sg\_rule\_description | Description for CIDR-block Ingress rule | `string` | `null` | no |
 | ingress\_rule\_cidr\_blocks | List of CIDR blocks that are allowed ingress to ElastiCache | `list(string)` | `[]` | no |
-| ingress\_rule\_sg | Security Group that is allowed ingress to ElastiCache | `string` | `null` | no |
 | ingress\_sg\_sg\_rule\_description | Description for Security Group Ingress rule | `string` | `null` | no |
 | instance\_type | Type of ec2 instance for elasticache | `string` | `"cache.t2.micro"` | no |
 | maintenance\_window | Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00 | `string` | `"sun:03:00-sun:04:00"` | no |
@@ -46,6 +45,7 @@ No requirements.
 | parameter\_group\_name | Elasticache parameter group name | `string` | `"default.redis4.0"` | no |
 | port | Elasticache port | `number` | `6379` | no |
 | replication\_group\_description | Description for ElastiCache Replication Group | `string` | `null` | no |
+| security\_group\_ids | Security Groups that are allowed ingress to ElastiCache | `set(string)` | `[]` | no |
 | snapshot\_window | (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00 | `string` | `"02:00-03:00"` | no |
 | subnet\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | n/a | yes |
 | tags | User-Defined tags | `map(string)` | `{}` | no |
