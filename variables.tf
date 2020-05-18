@@ -12,12 +12,6 @@ variable "tags" {
   default     = {}
 }
 
-variable "env" {
-  description = "Environment to tag resources with"
-  type        = string
-  default     = "default"
-}
-
 ###############################################
 # Networking
 ###############################################

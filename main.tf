@@ -81,5 +81,7 @@ resource "aws_elasticache_replication_group" "this" {
   security_group_ids         = [aws_security_group.this.id]
   apply_immediately          = var.apply_immediately
 
-  tags = local.tags
+  tags = merge(local.tags, {
+    Name = local.name
+  })
 }

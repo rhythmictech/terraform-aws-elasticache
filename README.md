@@ -35,7 +35,6 @@ No requirements.
 | availability\_zones | List of EC2 availability zones in which the replication group's cache clusters will be created | `list(string)` | <pre>[<br>  "us-east-1a",<br>  "us-east-1b",<br>  "us-east-1c"<br>]</pre> | no |
 | cluster\_size | Number of nodes in Elasticache cluster | `number` | `4` | no |
 | engine\_version | Elasticache engine version | `string` | `"4.0.10"` | no |
-| env | Environment to tag resources with | `string` | `"default"` | no |
 | ingress\_rule\_cidr\_blocks | List of CIDR blocks that are allowed ingress to ElastiCache | `list(string)` | `[]` | no |
 | ingress\_rule\_sg | Security Group that is allowed ingress to ElastiCache | `string` | `null` | no |
 | instance\_type | Type of ec2 instance for elasticache | `string` | `"cache.t2.micro"` | no |
