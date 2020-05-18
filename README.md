@@ -34,6 +34,7 @@ No requirements.
 | auto\_minor\_version\_upgrade | Specifies whether a minor engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window. | `bool` | `true` | no |
 | availability\_zones | List of EC2 availability zones in which the replication group's cache clusters will be created | `list(string)` | <pre>[<br>  "us-east-1a",<br>  "us-east-1b",<br>  "us-east-1c"<br>]</pre> | no |
 | cluster\_size | Number of nodes in Elasticache cluster | `number` | `4` | no |
+| egress\_security\_group\_rule\_description | Description for Egress rule | `string` | `null` | no |
 | engine\_version | Elasticache engine version | `string` | `"4.0.10"` | no |
 | ingress\_cidr\_sg\_rule\_description | Description for CIDR-block Ingress rule | `string` | `null` | no |
 | ingress\_rule\_cidr\_blocks | List of CIDR blocks that are allowed ingress to ElastiCache | `list(string)` | `[]` | no |

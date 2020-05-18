@@ -22,6 +22,12 @@ variable "cluster_size" {
   default     = 4
 }
 
+variable "egress_security_group_rule_description" {
+  description = "Description for Egress rule"
+  type        = string
+  default     = null
+}
+
 variable "engine_version" {
   description = "Elasticache engine version"
   type        = string
