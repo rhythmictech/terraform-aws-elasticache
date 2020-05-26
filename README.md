@@ -46,7 +46,7 @@ No requirements.
 | parameter\_group\_name | Elasticache parameter group name | `string` | `"default.redis4.0"` | no |
 | port | Elasticache port | `number` | `6379` | no |
 | replication\_group\_description | Description for ElastiCache Replication Group | `string` | `null` | no |
-| route53\_zone\_id | Object representing a Route53 CNAME at which to put elasticache | `string` | `""` | no |
+| route53\_zone\_id | The ID of the hosted zone to contain this record. | `string` | `""` | no |
 | security\_group\_ids | Security Groups that are allowed ingress to ElastiCache | `set(string)` | `[]` | no |
 | snapshot\_window | (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00 | `string` | `"02:00-03:00"` | no |
 | subnet\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | n/a | yes |

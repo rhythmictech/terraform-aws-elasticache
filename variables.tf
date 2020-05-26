@@ -95,7 +95,7 @@ variable "replication_group_description" {
 
 variable "route53_zone_id" {
   default     = ""
-  description = "Object representing a Route53 CNAME at which to put elasticache"
+  description = "The ID of the hosted zone to contain this record."
   type        = string
 }
 
