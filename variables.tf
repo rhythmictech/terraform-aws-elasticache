@@ -93,6 +93,12 @@ variable "replication_group_description" {
   type        = string
 }
 
+variable "route53_zone_id" {
+  default     = ""
+  description = "Object representing a Route53 CNAME at which to put elasticache"
+  type        = string
+}
+
 variable "security_group_ids" {
   default     = []
   description = "Security Groups that are allowed ingress to ElastiCache"
