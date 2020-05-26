@@ -1,14 +1,3 @@
-###############################################
-# General
-###############################################
-module "tags" {
-  source  = "rhythmictech/tags/terraform"
-  version = "1.0.0"
-
-  enforce_case = "UPPER"
-  names        = [var.name]
-  tags         = var.tags
-}
 
 ###############################################
 # Security & Networking
@@ -82,3 +71,7 @@ resource "aws_elasticache_replication_group" "this" {
     Name = local.name
   })
 }
+
+###############################################
+# DNS
+###############################################
