@@ -11,7 +11,7 @@ module "tags" {
 }
 
 ###############################################
-# Security Groups
+# Security & Networking
 ###############################################
 resource "aws_security_group" "this" {
   name   = local.security_group_name
