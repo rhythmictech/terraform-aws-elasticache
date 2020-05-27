@@ -58,6 +58,7 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | elasticache\_replication\_group | elasticache\_replication\_group resource |
+| elasticache\_route53\_record | aws route53 record resource |
 | security\_group | aws\_security\_group resource |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

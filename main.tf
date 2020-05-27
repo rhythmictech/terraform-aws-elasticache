@@ -80,10 +80,10 @@ data "aws_route53_zone" "selected" {
 }
 
 resource "aws_route53_record" "elasticache" {
-  count   = var.create_route_53_cname_record ? 1 : 0
+  count   = local.create_route_53_cname_record ? 1 : 0
   name    = local.name
-  records = [local.route53_record_entry]
+  records = [aws_elasticache_replication_group.this.primary_endpoint_address]
   type    = "CNAME"
   ttl     = "300"
-  zone_id = var.route53_cname_record.zone_id
+  zone_id = var.route53_zone_id
 }

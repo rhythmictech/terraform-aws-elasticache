@@ -14,9 +14,10 @@ data "aws_subnet_ids" "private" {
 module "example" {
   source = "../.."
 
-  name       = "test"
-  subnet_ids = data.aws_subnet_ids.private.ids
-  vpc_id     = data.aws_vpc.default.id
+  name            = "test"
+  route53_zone_id = "ZG4Z7NOL1TKSQ"
+  subnet_ids      = data.aws_subnet_ids.private.ids
+  vpc_id          = data.aws_vpc.default.id
 }
 
 output "example" {
