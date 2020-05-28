@@ -1,17 +1,6 @@
-###############################################
-# General
-###############################################
-module "tags" {
-  source  = "rhythmictech/tags/terraform"
-  version = "1.0.0"
-
-  enforce_case = "UPPER"
-  names        = [var.name]
-  tags         = var.tags
-}
 
 ###############################################
-# Security Groups
+# Security & Networking
 ###############################################
 resource "aws_security_group" "this" {
   name   = local.security_group_name
@@ -81,4 +70,20 @@ resource "aws_elasticache_replication_group" "this" {
   tags = merge(local.tags, {
     Name = local.name
   })
+}
+
+###############################################
+# DNS
+###############################################
+data "aws_route53_zone" "selected" {
+  zone_id = var.route53_zone_id
+}
+
+resource "aws_route53_record" "elasticache" {
+  count   = local.create_route_53_cname_record ? 1 : 0
+  name    = var.dns_cname_record_name
+  records = [aws_elasticache_replication_group.this.primary_endpoint_address]
+  type    = "CNAME"
+  ttl     = "300"
+  zone_id = var.route53_zone_id
 }

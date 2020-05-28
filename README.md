@@ -34,6 +34,7 @@ No requirements.
 | auto\_minor\_version\_upgrade | Specifies whether a minor engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window. | `bool` | `true` | no |
 | availability\_zones | List of EC2 availability zones in which the replication group's cache clusters will be created | `list(string)` | <pre>[<br>  "us-east-1a",<br>  "us-east-1b",<br>  "us-east-1c"<br>]</pre> | no |
 | cluster\_size | Number of nodes in Elasticache cluster | `number` | `4` | no |
+| dns\_cname\_record\_name | The name of the record, eg test.example.com. Must be specified with `route53_zone_id` | `string` | `null` | no |
 | egress\_security\_group\_rule\_description | Description for Egress rule | `string` | `null` | no |
 | engine\_version | Elasticache engine version | `string` | `"4.0.10"` | no |
 | ingress\_cidr\_sg\_rule\_description | Description for CIDR-block Ingress rule | `string` | `null` | no |
@@ -46,6 +47,7 @@ No requirements.
 | parameter\_group\_name | Elasticache parameter group name | `string` | `"default.redis4.0"` | no |
 | port | Elasticache port | `number` | `6379` | no |
 | replication\_group\_description | Description for ElastiCache Replication Group | `string` | `null` | no |
+| route53\_zone\_id | The ID of the hosted zone to contain this record. | `string` | `""` | no |
 | security\_group\_ids | Security Groups that are allowed ingress to ElastiCache | `set(string)` | `[]` | no |
 | snapshot\_window | (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00 | `string` | `"02:00-03:00"` | no |
 | subnet\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | n/a | yes |
@@ -57,6 +59,7 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | elasticache\_replication\_group | elasticache\_replication\_group resource |
+| elasticache\_route53\_record | aws route53 record resource |
 | security\_group | aws\_security\_group resource |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

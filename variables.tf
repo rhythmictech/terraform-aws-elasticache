@@ -22,6 +22,12 @@ variable "cluster_size" {
   type        = number
 }
 
+variable "dns_cname_record_name" {
+  default     = null
+  description = " The name of the record, eg test.example.com. Must be specified with `route53_zone_id`"
+  type        = string
+}
+
 variable "egress_security_group_rule_description" {
   default     = null
   description = "Description for Egress rule"
@@ -90,6 +96,12 @@ variable "port" {
 variable "replication_group_description" {
   default     = null
   description = "Description for ElastiCache Replication Group"
+  type        = string
+}
+
+variable "route53_zone_id" {
+  default     = ""
+  description = "The ID of the hosted zone to contain this record."
   type        = string
 }
 
