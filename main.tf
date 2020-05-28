@@ -81,7 +81,7 @@ data "aws_route53_zone" "selected" {
 
 resource "aws_route53_record" "elasticache" {
   count   = local.create_route_53_cname_record ? 1 : 0
-  name    = local.name
+  name    = var.dns_cname_record_name
   records = [aws_elasticache_replication_group.this.primary_endpoint_address]
   type    = "CNAME"
   ttl     = "300"

@@ -22,6 +22,12 @@ variable "cluster_size" {
   type        = number
 }
 
+variable "dns_cname_record_name" {
+  default     = null
+  description = " The name of the record, eg test.example.com. Must be specified with `route53_zone_id`"
+  type        = string
+}
+
 variable "egress_security_group_rule_description" {
   default     = null
   description = "Description for Egress rule"
