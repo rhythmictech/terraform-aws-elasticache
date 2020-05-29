@@ -76,6 +76,7 @@ resource "aws_elasticache_replication_group" "this" {
 # DNS
 ###############################################
 data "aws_route53_zone" "selected" {
+  count   = local.create_route_53_cname_record ? 1 : 0
   zone_id = var.route53_zone_id
 }
 
