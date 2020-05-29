@@ -13,5 +13,5 @@ output "elasticache_replication_group" {
 
 output "elasticache_route53_record" {
   description = "aws route53 record resource"
-  value       = local.create_route_53_cname_record ? aws_route53_record.elasticache[0] : {}
+  value       = try(aws_route53_record.elasticache[0], {})
 }
