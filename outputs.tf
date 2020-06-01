@@ -13,5 +13,10 @@ output "elasticache_replication_group" {
 
 output "elasticache_route53_record" {
   description = "aws route53 record resource"
-  value       = local.create_route_53_cname_record ? aws_route53_record.elasticache[0] : object()
+  value       = try(aws_route53_record.elasticache[0], {})
+}
+
+output "elasticache_fqdn" {
+  description = "Fully Qualified Domain Name of Elasticache: the endpoint or the CNAME if used"
+  value       = try(aws_route53_record.elasticache[0].fqdn, aws_elasticache_replication_group.this.primary_endpoint_address)
 }

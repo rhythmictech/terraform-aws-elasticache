@@ -58,6 +58,7 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
+| elasticache\_fqdn | Fully Qualified Domain Name of Elasticache: the endpoint or the CNAME if used |
 | elasticache\_replication\_group | elasticache\_replication\_group resource |
 | elasticache\_route53\_record | aws route53 record resource |
 | security\_group | aws\_security\_group resource |
