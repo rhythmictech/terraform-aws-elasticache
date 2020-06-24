@@ -1,4 +1,3 @@
-
 ###############################################
 # Security & Networking
 ###############################################
@@ -53,31 +52,65 @@ resource "aws_elasticache_subnet_group" "this" {
 ###############################################
 # Elasticache
 ###############################################
+
+# Use replication_group for Redis
 resource "aws_elasticache_replication_group" "this" {
+  count = var.engine == "redis" ? 1 : 0
+
+  replication_group_id = var.name
+
   apply_immediately             = var.apply_immediately
   auto_minor_version_upgrade    = var.auto_minor_version_upgrade
-  engine_version                = var.engine_version
+  engine_version                = local.engine_version
   maintenance_window            = var.maintenance_window
   node_type                     = var.instance_type
   notification_topic_arn        = var.notification_topic_arn
   number_cache_clusters         = var.cluster_size
-  parameter_group_name          = var.parameter_group_name
-  port                          = var.port
+  parameter_group_name          = local.parameter_group_name
+  port                          = local.port
   replication_group_description = local.replication_group_description
-  replication_group_id          = var.name
   security_group_ids            = [aws_security_group.this.id]
   snapshot_window               = var.snapshot_window
   subnet_group_name             = aws_elasticache_subnet_group.this.name
   tags                          = local.tags
 }
 
+# Use cluster for Memcached
+resource "aws_elasticache_cluster" "this" {
+  count = var.engine == "memcached" ? 1 : 0
+
+  cluster_id = var.name
+
+  apply_immediately      = var.apply_immediately
+  az_mode                = var.cluster_size > 1 ? "cross-az" : "single-az"
+  engine                 = var.engine
+  engine_version         = local.engine_version
+  maintenance_window     = var.maintenance_window
+  node_type              = var.instance_type
+  notification_topic_arn = var.notification_topic_arn
+  num_cache_nodes        = var.cluster_size
+  parameter_group_name   = local.parameter_group_name
+  port                   = local.port
+  security_group_ids     = [aws_security_group.this.id]
+  subnet_group_name      = aws_elasticache_subnet_group.this.name
+  tags                   = local.tags
+}
+
 ###############################################
 # DNS
 ###############################################
+
+locals {
+  elasticache_address = try(
+    aws_elasticache_replication_group.this[0].primary_endpoint_address,
+    aws_elasticache_cluster.this[0].cluster_address
+  )
+}
+
 resource "aws_route53_record" "elasticache" {
   count   = local.create_route_53_cname_record ? 1 : 0
   name    = var.dns_cname_record_name
-  records = [aws_elasticache_replication_group.this.primary_endpoint_address]
+  records = [local.elasticache_address]
   type    = "CNAME"
   ttl     = "300"
   zone_id = var.route53_zone_id
