@@ -3,17 +3,19 @@
 # Security & Networking
 ###############################################
 resource "aws_security_group" "this" {
-  name   = local.security_group_name
-  vpc_id = var.vpc_id
+  name_prefix = "${var.name}-"
+  description = "Security group for ${var.name} Elasticache cluster"
+  tags        = local.tags
+  vpc_id      = var.vpc_id
 
-  tags = merge(local.tags, {
-    Name = local.security_group_name
-  })
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group_rule" "egress" {
-  description       = local.egress_security_group_rule_description
-  cidr_blocks       = ["0.0.0.0/0"]
+  description       = var.egress_security_group_rule_description
+  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
   from_port         = 0
   protocol          = "-1"
   security_group_id = aws_security_group.this.id
@@ -24,7 +26,7 @@ resource "aws_security_group_rule" "egress" {
 resource "aws_security_group_rule" "ingress_cidr" {
   count             = local.create_ingress_cidr_sg_rule ? 1 : 0
   cidr_blocks       = var.ingress_rule_cidr_blocks
-  description       = local.ingress_cidr_sg_rule_description
+  description       = var.ingress_cidr_sg_rule_description
   from_port         = var.port
   protocol          = "tcp"
   security_group_id = aws_security_group.this.id
@@ -34,7 +36,7 @@ resource "aws_security_group_rule" "ingress_cidr" {
 
 resource "aws_security_group_rule" "ingress_sg" {
   cidr_blocks       = each.value
-  description       = local.ingress_sg_sg_rule_description
+  description       = var.ingress_sg_sg_rule_description
   for_each          = var.security_group_ids
   from_port         = var.port
   protocol          = "tcp"
@@ -44,7 +46,7 @@ resource "aws_security_group_rule" "ingress_sg" {
 }
 
 resource "aws_elasticache_subnet_group" "this" {
-  name       = local.subnet_group_name
+  name       = var.name
   subnet_ids = var.subnet_ids
 }
 
@@ -62,14 +64,11 @@ resource "aws_elasticache_replication_group" "this" {
   parameter_group_name          = var.parameter_group_name
   port                          = var.port
   replication_group_description = local.replication_group_description
-  replication_group_id          = local.name
+  replication_group_id          = var.name
   security_group_ids            = [aws_security_group.this.id]
   snapshot_window               = var.snapshot_window
   subnet_group_name             = aws_elasticache_subnet_group.this.name
-
-  tags = merge(local.tags, {
-    Name = local.name
-  })
+  tags                          = local.tags
 }
 
 ###############################################
