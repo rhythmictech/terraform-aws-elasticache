@@ -14,7 +14,7 @@ resource "aws_security_group" "this" {
 }
 
 resource "aws_security_group_rule" "egress" {
-  description       = local.egress_security_group_rule_description
+  description       = var.egress_security_group_rule_description
   cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
   from_port         = 0
   protocol          = "-1"
@@ -26,7 +26,7 @@ resource "aws_security_group_rule" "egress" {
 resource "aws_security_group_rule" "ingress_cidr" {
   count             = local.create_ingress_cidr_sg_rule ? 1 : 0
   cidr_blocks       = var.ingress_rule_cidr_blocks
-  description       = local.ingress_cidr_sg_rule_description
+  description       = var.ingress_cidr_sg_rule_description
   from_port         = var.port
   protocol          = "tcp"
   security_group_id = aws_security_group.this.id
@@ -36,7 +36,7 @@ resource "aws_security_group_rule" "ingress_cidr" {
 
 resource "aws_security_group_rule" "ingress_sg" {
   cidr_blocks       = each.value
-  description       = local.ingress_sg_sg_rule_description
+  description       = var.ingress_sg_sg_rule_description
   for_each          = var.security_group_ids
   from_port         = var.port
   protocol          = "tcp"
