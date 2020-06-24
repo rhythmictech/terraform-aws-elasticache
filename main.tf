@@ -3,12 +3,20 @@
 # Security & Networking
 ###############################################
 resource "aws_security_group" "this" {
-  name   = local.security_group_name
-  vpc_id = var.vpc_id
+  name_prefix = "${var.name}-"
+  description = "Security group for ${var.name} Elasticache cluster"
+  vpc_id      = var.vpc_id
 
-  tags = merge(local.tags, {
-    Name = local.security_group_name
-  })
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = merge(
+    local.tags,
+    {
+      Name = var.name
+    }
+  )
 }
 
 resource "aws_security_group_rule" "egress" {
@@ -62,13 +70,13 @@ resource "aws_elasticache_replication_group" "this" {
   parameter_group_name          = var.parameter_group_name
   port                          = var.port
   replication_group_description = local.replication_group_description
-  replication_group_id          = local.name
+  replication_group_id          = var.name
   security_group_ids            = [aws_security_group.this.id]
   snapshot_window               = var.snapshot_window
   subnet_group_name             = aws_elasticache_subnet_group.this.name
 
   tags = merge(local.tags, {
-    Name = local.name
+    Name = var.name
   })
 }
 
