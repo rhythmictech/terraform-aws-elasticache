@@ -1,6 +1,12 @@
-# terraform-aws-elasticache [![pre-commit-check](https://github.com/rhythmictech/terraform-aws-elasticache/workflows/pre-commit-check/badge.svg)](https://github.com/rhythmictech/terraform-aws-elasticache/actions) <a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=RhythmicTech" alt="follow on Twitter"></a>
+# terraform-aws-elasticache
 Terraform ElastiCache Module: Simple and Sensibly Opinionated
 
+[![tflint](https://github.com/rhythmictech/terraform-aws-elasticache/workflows/tflint/badge.svg?branch=main&event=push)](https://github.com/rhythmictech/terraform-aws-elasticache/actions?query=workflow%3Atflint+event%3Apush+branch%3Amain)
+[![tfsec](https://github.com/rhythmictech/terraform-aws-elasticache/workflows/tfsec/badge.svg?branch=main&event=push)](https://github.com/rhythmictech/terraform-aws-elasticache/actions?query=workflow%3Atfsec+event%3Apush+branch%3Amain)
+[![yamllint](https://github.com/rhythmictech/terraform-aws-elasticache/workflows/yamllint/badge.svg?branch=main&event=push)](https://github.com/rhythmictech/terraform-aws-elasticache/actions?query=workflow%3Ayamllint+event%3Apush+branch%3Amain)
+[![misspell](https://github.com/rhythmictech/terraform-aws-elasticache/workflows/misspell/badge.svg?branch=main&event=push)](https://github.com/rhythmictech/terraform-aws-elasticache/actions?query=workflow%3Amisspell+event%3Apush+branch%3Amain)
+[![pre-commit-check](https://github.com/rhythmictech/terraform-aws-elasticache/workflows/pre-commit-check/badge.svg?branch=main&event=push)](https://github.com/rhythmictech/terraform-aws-elasticache/actions?query=workflow%3Apre-commit-check+event%3Apush+branch%3Amain)
+<a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=RhythmicTech" alt="follow on Twitter"></a>
 
 
 ## Example
@@ -18,7 +24,9 @@ aws.amazon.com/elasticache/
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.14 |
 
 ## Providers
 
@@ -30,6 +38,9 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| name | Moniker to apply to all resources in the module | `string` | n/a | yes |
+| subnet\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | n/a | yes |
+| vpc\_id | VPC ID | `string` | n/a | yes |
 | apply\_immediately | Specifies whether any modifications are applied immediately, or during the next maintenance window | `bool` | `false` | no |
 | auto\_minor\_version\_upgrade | Specifies whether a minor engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window. | `bool` | `true` | no |
 | availability\_zones | List of EC2 availability zones in which the replication group's cache clusters will be created | `list(string)` | <pre>[<br>  "us-east-1a",<br>  "us-east-1b",<br>  "us-east-1c"<br>]</pre> | no |
@@ -42,7 +53,6 @@ No requirements.
 | ingress\_sg\_sg\_rule\_description | Description for Security Group Ingress rule | `string` | `null` | no |
 | instance\_type | Type of ec2 instance for elasticache | `string` | `"cache.t2.micro"` | no |
 | maintenance\_window | Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00 | `string` | `"sun:03:00-sun:04:00"` | no |
-| name | Moniker to apply to all resources in the module | `string` | n/a | yes |
 | notification\_topic\_arn | An Amazon Resource Name (ARN) of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my\_sns\_topic | `string` | `null` | no |
 | parameter\_group\_name | Elasticache parameter group name | `string` | `"default.redis4.0"` | no |
 | port | Elasticache port | `number` | `6379` | no |
@@ -50,9 +60,7 @@ No requirements.
 | route53\_zone\_id | The ID of the hosted zone to contain this record. | `string` | `""` | no |
 | security\_group\_ids | Security Groups that are allowed ingress to ElastiCache | `set(string)` | `[]` | no |
 | snapshot\_window | (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00 | `string` | `"02:00-03:00"` | no |
-| subnet\_ids | List of subnet IDs to make Elasticache available on | `list(string)` | n/a | yes |
 | tags | User-Defined tags | `map(string)` | `{}` | no |
-| vpc\_id | VPC ID | `string` | n/a | yes |
 
 ## Outputs
 
