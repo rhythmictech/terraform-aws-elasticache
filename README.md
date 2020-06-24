@@ -43,7 +43,6 @@ aws.amazon.com/elasticache/
 | vpc\_id | VPC ID | `string` | n/a | yes |
 | apply\_immediately | Specifies whether any modifications are applied immediately, or during the next maintenance window | `bool` | `false` | no |
 | auto\_minor\_version\_upgrade | Specifies whether a minor engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window. | `bool` | `true` | no |
-| availability\_zones | List of EC2 availability zones in which the replication group's cache clusters will be created | `list(string)` | <pre>[<br>  "us-east-1a",<br>  "us-east-1b",<br>  "us-east-1c"<br>]</pre> | no |
 | cluster\_size | Number of nodes in Elasticache cluster | `number` | `4` | no |
 | dns\_cname\_record\_name | The name of the record, eg test.example.com. Must be specified with `route53_zone_id` | `string` | `null` | no |
 | egress\_security\_group\_rule\_description | Description for Egress rule | `string` | `null` | no |

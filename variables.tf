@@ -10,12 +10,6 @@ variable "auto_minor_version_upgrade" {
   type        = bool
 }
 
-variable "availability_zones" {
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  description = "List of EC2 availability zones in which the replication group's cache clusters will be created"
-  type        = list(string)
-}
-
 variable "cluster_size" {
   default     = 4
   description = "Number of nodes in Elasticache cluster"
