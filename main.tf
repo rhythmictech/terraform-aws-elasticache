@@ -21,7 +21,7 @@ resource "aws_security_group" "this" {
 
 resource "aws_security_group_rule" "egress" {
   description       = local.egress_security_group_rule_description
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
   from_port         = 0
   protocol          = "-1"
   security_group_id = aws_security_group.this.id
