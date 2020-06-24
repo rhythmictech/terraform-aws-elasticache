@@ -28,8 +28,14 @@ variable "egress_security_group_rule_description" {
   type        = string
 }
 
+variable "engine" {
+  description = "memcached or redis"
+  default     = "redis"
+  type        = string
+}
+
 variable "engine_version" {
-  default     = "4.0.10"
+  default     = null
   description = "Elasticache engine version"
   type        = string
 }
@@ -76,13 +82,13 @@ variable "notification_topic_arn" {
 }
 
 variable "parameter_group_name" {
-  default     = "default.redis4.0"
+  default     = null
   description = "Elasticache parameter group name"
   type        = string
 }
 
 variable "port" {
-  default     = 6379
+  default     = null
   description = "Elasticache port"
   type        = number
 }
