@@ -52,7 +52,7 @@ resource "aws_security_group_rule" "ingress_sg" {
 }
 
 resource "aws_elasticache_subnet_group" "this" {
-  name       = local.subnet_group_name
+  name       = var.name
   subnet_ids = var.subnet_ids
 }
 
