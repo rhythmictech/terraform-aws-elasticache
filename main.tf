@@ -34,14 +34,14 @@ resource "aws_security_group_rule" "ingress_cidr" {
 }
 
 resource "aws_security_group_rule" "ingress_sg" {
-  cidr_blocks       = each.value
-  description       = var.ingress_sg_sg_rule_description
-  for_each          = var.security_group_ids
-  from_port         = var.port
-  protocol          = "tcp"
-  security_group_id = aws_security_group.this.id
-  to_port           = var.port
-  type              = "ingress"
+  source_security_group_id = each.value
+  description              = var.ingress_sg_sg_rule_description
+  for_each                 = var.security_group_ids
+  from_port                = var.port
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.this.id
+  to_port                  = var.port
+  type                     = "ingress"
 }
 
 resource "aws_elasticache_subnet_group" "this" {
