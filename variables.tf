@@ -16,6 +16,12 @@ variable "cluster_size" {
   type        = number
 }
 
+variable "create" {
+  default = true
+  description = "If false, this module does nothing"
+  type = bool
+}
+
 variable "dns_cname_record_name" {
   default     = null
   description = " The name of the record, eg test.example.com. Must be specified with `route53_zone_id`"
@@ -108,7 +114,7 @@ variable "route53_zone_id" {
 variable "security_group_ids" {
   default     = []
   description = "Security Groups that are allowed ingress to ElastiCache"
-  type        = set(string)
+  type        = list(string)
 }
 
 variable "snapshot_window" {
