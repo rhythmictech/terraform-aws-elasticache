@@ -3,6 +3,7 @@
 ###############################################
 resource "aws_security_group" "this" {
   count = var.create ? 1 : 0
+
   name_prefix = var.name
   description = "Security group for ${var.name} Elasticache cluster"
   tags        = local.tags
@@ -26,7 +27,7 @@ resource "aws_security_group_rule" "egress" {
 }
 
 resource "aws_security_group_rule" "ingress_cidr" {
-  count             = local.create_ingress_cidr_sg_rule ? 1 : 0
+  count = local.create_ingress_cidr_sg_rule ? 1 : 0
 
   cidr_blocks       = var.ingress_rule_cidr_blocks
   description       = var.ingress_cidr_sg_rule_description
@@ -38,7 +39,7 @@ resource "aws_security_group_rule" "ingress_cidr" {
 }
 
 resource "aws_security_group_rule" "ingress_sg" {
-  count             = length(var.security_group_ids)
+  count = length(var.security_group_ids)
 
   description              = var.ingress_sg_sg_rule_description
   from_port                = local.port
@@ -51,7 +52,7 @@ resource "aws_security_group_rule" "ingress_sg" {
 
 resource "aws_elasticache_subnet_group" "this" {
   count = var.create ? 1 : 0
-  
+
   name       = var.name
   subnet_ids = var.subnet_ids
 }

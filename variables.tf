@@ -17,9 +17,9 @@ variable "cluster_size" {
 }
 
 variable "create" {
-  default = true
+  default     = true
   description = "If false, this module does nothing"
-  type = bool
+  type        = bool
 }
 
 variable "dns_cname_record_name" {
@@ -135,6 +135,6 @@ variable "tags" {
 }
 
 variable "vpc_id" {
-  description = "VPC ID"
+  description = "VPC ID to create cluster in"
   type        = string
 }
