@@ -39,7 +39,7 @@ resource "aws_security_group_rule" "ingress_cidr" {
 }
 
 resource "aws_security_group_rule" "ingress_sg" {
-  count = length(var.security_group_ids)
+  count = local.create_ingress_cidr_sg_rule ? length(var.security_group_ids) : 0
 
   description              = var.ingress_sg_sg_rule_description
   from_port                = local.port
@@ -77,9 +77,9 @@ resource "aws_elasticache_replication_group" "this" {
   parameter_group_name          = local.parameter_group_name
   port                          = local.port
   replication_group_description = local.replication_group_description
-  security_group_ids            = [aws_security_group.this[0].id]
+  security_group_ids            = try([aws_security_group.this[0].id], [])
   snapshot_window               = var.snapshot_window
-  subnet_group_name             = aws_elasticache_subnet_group.this[0].name
+  subnet_group_name             = try(aws_elasticache_subnet_group.this[0].name, "")
   tags                          = local.tags
 }
 
@@ -111,7 +111,8 @@ resource "aws_elasticache_cluster" "this" {
 locals {
   elasticache_address = try(
     aws_elasticache_replication_group.this[0].primary_endpoint_address,
-    aws_elasticache_cluster.this[0].cluster_address
+    aws_elasticache_cluster.this[0].cluster_address,
+    ""
   )
 }
 
