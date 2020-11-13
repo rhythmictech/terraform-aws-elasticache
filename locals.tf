@@ -1,6 +1,7 @@
 
 locals {
   create_ingress_cidr_sg_rule  = var.create && length(var.ingress_rule_cidr_blocks) > 0
+  create_ingress_sg_sg_rule    = var.create && length(var.security_group_ids) > 0
   create_cluster               = var.create && var.engine == "memcached"
   create_replication_group     = var.create && var.engine == "redis"
   create_route_53_cname_record = var.create && var.route53_zone_id != "" && var.dns_cname_record_name != null ? true : false
