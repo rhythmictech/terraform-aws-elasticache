@@ -39,7 +39,7 @@ resource "aws_security_group_rule" "ingress_cidr" {
 }
 
 resource "aws_security_group_rule" "ingress_sg" {
-  count = local.create_ingress_cidr_sg_rule ? length(var.security_group_ids) : 0
+  count = local.create_ingress_sg_sg_rule ? length(var.security_group_ids) : 0
 
   description              = var.ingress_sg_sg_rule_description
   from_port                = local.port
