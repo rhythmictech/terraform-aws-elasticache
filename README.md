@@ -27,13 +27,13 @@ aws.amazon.com/elasticache/
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.20 |
-| aws | ~> 2.49 |
+| aws | >= 2.49 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.49 |
+| aws | >= 2.49 |
 
 ## Inputs
 
