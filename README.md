@@ -68,10 +68,12 @@ aws.amazon.com/elasticache/
 
 | Name | Description |
 |------|-------------|
+| cluster\_address | (Memcached only) The DNS name of the cache cluster without the port appended. |
 | elasticache\_cluster\_id | ElastiCache cluster ID |
 | elasticache\_fqdn | Fully Qualified Domain Name of Elasticache: the endpoint or the CNAME if used |
 | elasticache\_replication\_group\_id | elasticache\_replication\_group resource |
 | elasticache\_route53\_record\_id | aws route53 record resource |
+| primary\_endpoint\_address | (Redis only) The address of the endpoint for the primary node in the replication group, if the cluster mode is disabled. |
 | security\_group\_id | aws\_security\_group resource |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
