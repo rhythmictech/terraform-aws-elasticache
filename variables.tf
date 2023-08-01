@@ -70,6 +70,10 @@ variable "instance_type" {
   type        = string
 }
 
+variable "log_delivery_configuration" {
+  default = []
+}
+
 variable "maintenance_window" {
   default     = "sun:03:00-sun:04:00"
   description = "Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00"
