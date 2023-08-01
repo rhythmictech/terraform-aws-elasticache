@@ -81,6 +81,15 @@ resource "aws_elasticache_replication_group" "this" {
   snapshot_window               = var.snapshot_window
   subnet_group_name             = try(aws_elasticache_subnet_group.this[0].name, "")
   tags                          = local.tags
+  dynamic "log_delivery_configuration" {
+    for_each = var.log_delivery_configuration
+    content {
+      destination      = log_delivery_configuration.value["destination"]
+      destination_type = log_delivery_configuration.value["destination_type"]
+      log_format       = log_delivery_configuration.value["log_format"]
+      log_type         = log_delivery_configuration.value["log_type"]
+    }
+  }
 }
 
 # Use cluster for Memcached
@@ -102,6 +111,16 @@ resource "aws_elasticache_cluster" "this" {
   security_group_ids     = [aws_security_group.this[0].id]
   subnet_group_name      = aws_elasticache_subnet_group.this[0].name
   tags                   = local.tags
+
+  dynamic "log_delivery_configuration" {
+    for_each = var.log_delivery_configuration
+    content {
+      destination      = log_delivery_configuration.value["destination"]
+      destination_type = log_delivery_configuration.value["destination_type"]
+      log_format       = log_delivery_configuration.value["log_format"]
+      log_type         = log_delivery_configuration.value["log_type"]
+    }
+  }
 }
 
 ###############################################
