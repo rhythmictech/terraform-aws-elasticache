@@ -67,20 +67,20 @@ resource "aws_elasticache_replication_group" "this" {
 
   replication_group_id = var.name
 
-  apply_immediately             = var.apply_immediately
-  auto_minor_version_upgrade    = var.auto_minor_version_upgrade
-  engine_version                = local.engine_version
-  maintenance_window            = var.maintenance_window
-  node_type                     = var.instance_type
-  notification_topic_arn        = var.notification_topic_arn
-  number_cache_clusters         = var.cluster_size
-  parameter_group_name          = local.parameter_group_name
-  port                          = local.port
-  replication_group_description = local.replication_group_description
-  security_group_ids            = try([aws_security_group.this[0].id], [])
-  snapshot_window               = var.snapshot_window
-  subnet_group_name             = try(aws_elasticache_subnet_group.this[0].name, "")
-  tags                          = local.tags
+  apply_immediately          = var.apply_immediately
+  auto_minor_version_upgrade = var.auto_minor_version_upgrade
+  engine_version             = local.engine_version
+  maintenance_window         = var.maintenance_window
+  node_type                  = var.instance_type
+  notification_topic_arn     = var.notification_topic_arn
+  num_cache_clusters         = var.cluster_size
+  parameter_group_name       = local.parameter_group_name
+  port                       = local.port
+  description                = local.replication_group_description
+  security_group_ids         = try([aws_security_group.this[0].id], [])
+  snapshot_window            = var.snapshot_window
+  subnet_group_name          = try(aws_elasticache_subnet_group.this[0].name, "")
+  tags                       = local.tags
   dynamic "log_delivery_configuration" {
     for_each = var.log_delivery_configuration
     content {
